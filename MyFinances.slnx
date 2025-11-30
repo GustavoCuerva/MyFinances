@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="MyFinances.Application/MyFinances.Application.csproj" Id="4da698fb-fa64-4405-ad5a-4a9d4f936c93" />
+    <Project Path="MyFinances.Common/MyFinances.Common.csproj" Id="f203b9c5-4273-4ace-b96f-f06439244b8a" />
+    <Project Path="MyFinances.Domain/MyFinances.Domain.csproj" Id="3e3f48d0-131c-4906-806b-3a380379a7ff" />
+    <Project Path="MyFinances.Infrastructure/MyFinances.Infrastructure.csproj" Id="246d526b-d63b-4563-97dc-25ca5f296a49" />
+    <Project Path="MyFinances.Presentation/MyFinances.Presentation.csproj" Id="23db7e38-d5dc-4ff7-875c-a96844b8654d" />
+  </Folder>
+  <Folder Name="/test/" />
+</Solution>
