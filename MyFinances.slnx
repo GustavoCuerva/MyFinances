@@ -10,5 +10,7 @@
     <Project Path="MyFinances.Infrastructure/MyFinances.Infrastructure.csproj" Id="246d526b-d63b-4563-97dc-25ca5f296a49" />
     <Project Path="MyFinances.Presentation/MyFinances.Presentation.csproj" Id="23db7e38-d5dc-4ff7-875c-a96844b8654d" />
   </Folder>
-  <Folder Name="/test/" />
+  <Folder Name="/test/">
+    <Project Path="MyFinances.Domain.UnitTests/MyFinances.Domain.UnitTests.csproj" Id="ade46c46-763a-48c1-958b-7789dc618fa4" />
+  </Folder>
 </Solution>
