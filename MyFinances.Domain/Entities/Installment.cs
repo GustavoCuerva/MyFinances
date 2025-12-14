@@ -1,5 +1,6 @@
 ﻿using MyFinances.Common.Result;
 using MyFinances.Domain.Enums;
+using MyFinances.Domain.ErrorList;
 
 namespace MyFinances.Domain.Entities;
 
@@ -20,12 +21,12 @@ public class Installment
 	private Installment() { }
 
 	public static Result<Installment> Create(int installmentNumber, DateTimeOffset dateForPayment, int requiredAmount, int reservedAmount, string responsible){
-		
+
 		if (requiredAmount < 1)
-			return new Error("installment.requiredAmount", "Required Amount must be greater than 0.");
+			return Errors.Installment.RequiredAmountIsSmaller1();
 
 		if (reservedAmount < 0)
-			return new Error("installment.reservedAmount", "Reserved Amount must be greater or equal than 0");
+			return Errors.Installment.ReservedAmountIsSmaller0();
 
 		return new Installment()
 		{

@@ -1,4 +1,5 @@
 ﻿using MyFinances.Common.Result;
+using MyFinances.Domain.ErrorList;
 
 namespace MyFinances.Domain.Entities;
 
@@ -16,7 +17,7 @@ public class Allocation
 	public static Result<Allocation> Create(string name, IEnumerable<PlannedExpense> plannedExpenses, int freeAmount)
 	{
 		if (!plannedExpenses.Any())
-			return new Error("allocation.plannedExpenses.empty", "The planned expenses can't is empty");
+			return Errors.Allocation.PlannedExpenseIsEmpty();
 
 		return new Allocation()
 		{

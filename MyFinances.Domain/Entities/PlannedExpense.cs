@@ -1,5 +1,6 @@
 ﻿using MyFinances.Common.Result;
 using MyFinances.Domain.Enums;
+using MyFinances.Domain.ErrorList;
 
 namespace MyFinances.Domain.Entities;
 
@@ -19,7 +20,7 @@ public class PlannedExpense
 	public static Result<PlannedExpense> Create(string name, string description, DateTimeOffset data, ExpenseTypes type, IEnumerable<Installment> installments)
 	{
 		if (!installments.Any())
-			return new Error("plannedExpense.installments.empty", "The installments can't is empty.");
+			return Errors.PlannedExpense.InstallmentIsEmpty();
 
 		return new PlannedExpense()
 		{

@@ -1,4 +1,5 @@
 ﻿using MyFinances.Common.Result;
+using MyFinances.Domain.ErrorList;
 
 namespace MyFinances.Domain.Entities;
 
@@ -16,7 +17,7 @@ public class Wallet
 	public static Result<Wallet> Create(string name, string description, IEnumerable<Category> categories)
 	{
 		if (categories.Sum(c => c.Percent) != 100)
-			return new Error("wallet.percent", "The division of categories must equal 100");
+			return Errors.Wallet.PercentCategorisIsNot100();
 
 		return new Wallet()
 		{

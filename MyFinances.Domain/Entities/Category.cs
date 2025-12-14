@@ -1,4 +1,5 @@
 ﻿using MyFinances.Common.Result;
+using MyFinances.Domain.ErrorList;
 
 namespace MyFinances.Domain.Entities;
 
@@ -16,13 +17,13 @@ public class Category
 	public static Result<Category> Create(string name, string description, decimal percent, IEnumerable<Allocation> allocations)
 	{
 		if (percent > 100)
-			return new Error("category.percent", "The percentage can't be more than 100%.");
+			return Errors.Category.InvalidPercent();
 
 		if (percent < 0)
-			return new Error("category.percent", "The percentage can't be smaller than 0%.");
+			return Errors.Category.InvalidPercent();
 
 		if (!allocations.Any())
-			return new Error("category.allocations.empty", "The allocations can't is empty.");
+			return Errors.Category.AllocationIsEmpty();
 
 		return new Category()
 		{
