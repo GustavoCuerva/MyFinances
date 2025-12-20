@@ -7,11 +7,14 @@ namespace MyFinances.Domain.UnitTests;
 
 public class CategoryTests
 {
-	private Installment CreateInstallment() =>
-		Installment.Create(1, DateTimeOffset.Now, 1, 0, "");
+	private Installment CreateInstallment(int reservedAmount) =>
+		Installment.Create(1, DateTimeOffset.Now, (reservedAmount + 1), reservedAmount, "");
 
-	private PlannedExpense CreatePlannedExpense() =>
-		PlannedExpense.Create("", "", DateTimeOffset.Now, ExpenseTypes.Appellant, [CreateInstallment()]);
+	private PlannedExpense CreatePlannedExpense(int reservedAmount) =>
+		PlannedExpense.Create("Name", "Description", DateTimeOffset.Now, ExpenseTypes.Appellant, [CreateInstallment(reservedAmount)]);
+
+	private WalletCategoryTransaction CreateWalletCategoryTransaction(int amount) =>
+		WalletCategoryTransaction.Create(1, "Description", amount, TransactionType.Expense, Allocation.Bank, DateTimeOffset.Now);
 
 	[Theory]
 	[InlineData(101)]
@@ -19,12 +22,13 @@ public class CategoryTests
 	public void Create_PercentNotBetween0And100_ReturnsError(int percent)
 	{
 		// Arrange
-		int freeAmountAllocation = 0;
-		var plannedExpense = CreatePlannedExpense();
-		var allocation = Allocation.Create("", [plannedExpense], freeAmountAllocation);
+		int amount = 2;
+		int reservedAmount = 1;
+		var transaction = CreateWalletCategoryTransaction(amount);
+		var plannedExpense = CreatePlannedExpense(reservedAmount);
 
 		// Act
-		var result = Category.Create("Category", "Description", percent, [allocation]);
+		var result = Category.Create("Category", "Description", percent, [transaction], [plannedExpense]);
 
 		// Assert
 		result.IsFailure.ShouldBeTrue();
@@ -33,17 +37,40 @@ public class CategoryTests
 	}
 
 	[Fact]
-	public void Create_ListAllocationEmpty_ReturnsError()
+	public void Create_BalanceBelow0_ReturnsError()
 	{
 		// Arrange
 		int percent = 50;
+		int amount = -50;
+		int reservedAmount = 1;
+		var transaction = CreateWalletCategoryTransaction(amount);
+		var plannedExpense = CreatePlannedExpense(reservedAmount);
 
 		// Act
-		var result = Category.Create("Category", "Description", percent, []);
+		var result = Category.Create("Category", "Description", percent, [transaction], [plannedExpense]);
 
 		// Assert
 		result.IsFailure.ShouldBeTrue();
 		var error = result.Errors.ShouldHaveSingleItem();
-		error.Code.ShouldContain(Errors.Category.AllocationIsEmpty().Code);
+		error.Code.ShouldContain(Errors.Category.BalanceIsNegative().Code);
+	}
+
+	[Fact]
+	public void Create_TotalReservedAmountBelowBalance_ReturnsError()
+	{
+		// Arrange
+		int percent = 50;
+		int amount = 20;
+		int reservedAmount = 30;
+		var transaction = CreateWalletCategoryTransaction(amount);
+		var plannedExpense = CreatePlannedExpense(reservedAmount);
+
+		// Act
+		var result = Category.Create("Category", "Description", percent, [transaction], [plannedExpense]);
+
+		// Assert
+		result.IsFailure.ShouldBeTrue();
+		var error = result.Errors.ShouldHaveSingleItem();
+		error.Code.ShouldContain(Errors.Category.ReservedAmountIsGreaterThanBalance().Code);
 	}
 }

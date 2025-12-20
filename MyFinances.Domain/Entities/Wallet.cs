@@ -9,8 +9,7 @@ public class Wallet
 	public string Name { get; private set; } = string.Empty;
 	public string Description { get; private set; } = string.Empty;
 	public IEnumerable<Category> Categories { get; private set; } = [];
-	public int Amount => Categories.Sum(c => c.Amount);
-	public IEnumerable<Statment> Statments { get; private set; }
+	public int Amount => Categories.Sum(c => c.Balance);
 
 	private Wallet() { }
 
