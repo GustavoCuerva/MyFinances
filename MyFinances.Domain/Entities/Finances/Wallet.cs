@@ -1,7 +1,7 @@
 ﻿using MyFinances.Common.Result;
 using MyFinances.Domain.ErrorList;
 
-namespace MyFinances.Domain.Entities;
+namespace MyFinances.Domain.Entities.Finances;
 
 public class Wallet
 {

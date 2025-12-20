@@ -1,6 +1,6 @@
 ﻿using MyFinances.Domain.Enums;
 
-namespace MyFinances.Domain.Entities;
+namespace MyFinances.Domain.Entities.Finances;
 
 public class WalletCategoryTransaction
 {

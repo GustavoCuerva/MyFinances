@@ -1,9 +1,8 @@
-﻿using MyFinances.Domain.Entities;
-using MyFinances.Domain.Enums;
+﻿using MyFinances.Domain.Entities.Finances;
 using MyFinances.Domain.ErrorList;
 using Shouldly;
 
-namespace MyFinances.Domain.UnitTests;
+namespace MyFinances.Domain.UnitTests.Finances;
 
 public class WalletTests
 {

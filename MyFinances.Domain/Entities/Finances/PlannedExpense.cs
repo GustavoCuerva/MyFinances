@@ -2,7 +2,7 @@
 using MyFinances.Domain.Enums;
 using MyFinances.Domain.ErrorList;
 
-namespace MyFinances.Domain.Entities;
+namespace MyFinances.Domain.Entities.Finances;
 
 public class PlannedExpense
 {
