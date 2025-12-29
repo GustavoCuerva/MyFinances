@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Entities\Finances\" />
-    <Folder Include="Entities\Clients\" />
   </ItemGroup>
 
 </Project>
