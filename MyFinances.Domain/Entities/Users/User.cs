@@ -2,15 +2,15 @@
 
 namespace MyFinances.Domain.Entities.Clients;
 
-public class Client
+public class User
 {
 	public int Id { get; private set; }
 	public string Name { get; private set; } = string.Empty;
 	public IEnumerable<Wallet> Wallets { get; private set; } = [];
 
-	private Client() { }
+	private User() { }
 
-	public static Client Create(int id, string name, IEnumerable<Wallet> wallets)
+	public static User Create(int id, string name, IEnumerable<Wallet> wallets)
 		=> new()
 		{
 			Id = id,

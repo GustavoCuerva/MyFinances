@@ -1,6 +1,6 @@
 ﻿namespace MyFinances.Application.Common.Database.DbModels;
 
-public class ClientDbModel
+public class UserDbModel
 {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
