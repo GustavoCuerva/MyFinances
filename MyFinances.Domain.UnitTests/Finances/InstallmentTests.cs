@@ -1,4 +1,5 @@
 ﻿using MyFinances.Domain.Entities.Finances;
+using MyFinances.Domain.Enums;
 using MyFinances.Domain.ErrorList;
 using Shouldly;
 
@@ -16,7 +17,7 @@ public class InstallmentTests
 		int reservedAmount = 0;
 
 		// Act
-		var result = Installment.Create(installmentNumber, DateTimeOffset.Now, requiredAmount, reservedAmount, "");
+		var result = Installment.Create(installmentNumber, DateTimeOffset.Now, requiredAmount, reservedAmount, "", Allocation.Bank);
 
 		// Assert
 		result.IsFailure.ShouldBeTrue();
@@ -33,7 +34,7 @@ public class InstallmentTests
 		int requiredAmount = 1;
 
 		// Act
-		var result = Installment.Create(installmentNumber, DateTimeOffset.Now, requiredAmount, reservedAmount, "");
+		var result = Installment.Create(installmentNumber, DateTimeOffset.Now, requiredAmount, reservedAmount, "", Allocation.Bank);
 
 		// Assert
 		result.IsFailure.ShouldBeTrue();

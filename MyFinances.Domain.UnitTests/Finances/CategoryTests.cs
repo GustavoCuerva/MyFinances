@@ -8,7 +8,7 @@ namespace MyFinances.Domain.UnitTests.Finances;
 public class CategoryTests
 {
 	private Installment CreateInstallment(int reservedAmount) =>
-		Installment.Create(1, DateTimeOffset.Now, (reservedAmount + 1), reservedAmount, "");
+		Installment.Create(1, DateTimeOffset.Now, (reservedAmount + 1), reservedAmount, "", Allocation.Bank);
 
 	private PlannedExpense CreatePlannedExpense(int reservedAmount) =>
 		PlannedExpense.Create("Name", "Description", DateTimeOffset.Now, ExpenseTypes.Appellant, [CreateInstallment(reservedAmount)]);

@@ -17,7 +17,7 @@ public class WalletTests
 		};
 
 		// Act
-		var result = Wallet.Create("Wallet Test", "This Wallet is only test if the sum percent to categoris is not diferent 100", categories);
+		var result = Wallet.Create("Wallet Test", "This Wallet is only test if the sum percent to categories is not diferent 100", categories);
 		
 		// Assert
 		result.IsFailure.ShouldBeTrue();

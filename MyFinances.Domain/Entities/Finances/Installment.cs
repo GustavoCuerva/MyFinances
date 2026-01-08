@@ -13,6 +13,7 @@ public class Installment
 	public int RequiredAmount { get; private set; }
 	public int ReservedAmount { get; private set; }
 	public string Responsible { get; private set; } = string.Empty;
+	public Allocation Allocation { get; private set; }
 	public PlannedExpenseStatus StatusReserved 
 		=> ReservedAmount >= ReservedAmount ? PlannedExpenseStatus.Full
 							: ReservedAmount > 0 ? PlannedExpenseStatus.Partial
@@ -20,7 +21,7 @@ public class Installment
 
 	private Installment() { }
 
-	public static Result<Installment> Create(int installmentNumber, DateTimeOffset dateForPayment, int requiredAmount, int reservedAmount, string responsible){
+	public static Result<Installment> Create(int installmentNumber, DateTimeOffset dateForPayment, int requiredAmount, int reservedAmount, string responsible, Allocation allocation){
 
 		if (requiredAmount < 1)
 			return Errors.Installment.RequiredAmountIsSmaller1();
@@ -34,7 +35,8 @@ public class Installment
 			DateForPayment = dateForPayment,
 			RequiredAmount = requiredAmount,
 			ReservedAmount = reservedAmount,
-			Responsible = responsible
+			Responsible = responsible,
+			Allocation = allocation
 		};
 	}
 }
