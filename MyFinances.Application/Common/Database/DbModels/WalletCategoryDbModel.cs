@@ -8,6 +8,8 @@ public class WalletCategoryDbModel
 	public int CategoryId { get; set; }
 	public CategoryDbModel Category {  get; set; }
 	public double Percent {  get; set; }
+	public DateTimeOffset CreateAt { get; set; }
+	public bool IsActive { get; set; }
 	public ICollection<WalletCategoryTransactionDbModel> Transactions { get; set; } = [];
 	public ICollection<PlannedExpenseDbModel> PlannedExpenses { get; set; } = [];
 }

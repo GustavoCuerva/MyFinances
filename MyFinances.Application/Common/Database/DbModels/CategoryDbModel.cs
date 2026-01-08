@@ -8,6 +8,5 @@ public class CategoryDbModel
 	public UserDbModel User { get; set; }
 	public string Name { get; set; } = string.Empty;
 	public string Description { get; set; } = string.Empty;
-	public double Percent {  get; set; }
 	public ICollection<WalletCategoryDbModel> CategoryWallets { get; set; }
 }

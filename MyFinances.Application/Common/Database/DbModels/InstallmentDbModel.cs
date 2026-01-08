@@ -11,5 +11,7 @@ public class InstallmentDbModel
 	public bool IsPayed { get; set; }
 	public int RequiredAmount { get; set; }
 	public int ReservedAmount { get; set; }
+	public int AllocationId { get; set; }
+	public AllocationDbModel Allocation { get; set; }
 	public string Responsible { get; set; } = string.Empty;
 }
