@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyFinances.Application.Common.Database;
 using MyFinances.Application.Common.Database.DbModels;
 using MyFinances.Infrastructure.Database.EntitiesConfiguration;
 
 namespace MyFinances.Infrastructure.Database;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 		: base(options) { }

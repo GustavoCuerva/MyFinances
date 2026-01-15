@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MyFinances.Application.Common.Database;
 using MyFinances.Infrastructure.Database;
 
 namespace MyFinances.Infrastructure;
@@ -14,6 +15,9 @@ public static class InfrastructureDependencyInjection
 		services.AddDbContext<ApplicationDbContext>(options =>
 			options.UseSqlServer(connectionStringSqlServer)
 		);
+
+		// Repository Ef Core
+		services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
 		return services;
 	}
