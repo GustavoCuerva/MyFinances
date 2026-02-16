@@ -1,6 +1,7 @@
 using MyFinances.Application;
 using MyFinances.Infrastructure;
 using MyFinances.Infrastructure.Configuration;
+using MyFinances.Presentation.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -23,5 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.AddEndpointsCategory();
 
 app.Run();
