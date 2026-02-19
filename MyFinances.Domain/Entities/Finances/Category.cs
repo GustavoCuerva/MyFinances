@@ -18,11 +18,6 @@ public class Category
 
 	public static Result<Category> Create(string name, string description, decimal percent, IEnumerable<WalletCategoryTransaction> transactions, IEnumerable<PlannedExpense> plannedExpenses)
 	{
-		if (percent > 100)
-			return Errors.Category.InvalidPercent();
-
-		if (percent < 0)
-			return Errors.Category.InvalidPercent();
 
 		var category = new Category()
 		{
@@ -33,12 +28,28 @@ public class Category
 			PlannedExpenses = plannedExpenses
 		};
 
+		var resultIsValid = IsValid(category);
+
+		return resultIsValid.IsFailure ? resultIsValid.Errors : category;
+	}
+
+	private static Result IsValid(Category category)
+	{
+		if (category.Percent is > 100 or < 0)
+			return Errors.Category.InvalidPercent();
+
 		if (category.Balance < 0)
 			return Errors.Category.BalanceIsNegative();
 
 		if (category.TotalReservedAmount > category.Balance)
 			return Errors.Category.ReservedAmountIsGreaterThanBalance();
 
-		return category;
+		if (string.IsNullOrEmpty(category.Name))
+			return Errors.Category.NameCannotIsNullOrEmpty();
+
+		if (string.IsNullOrEmpty(category.Description))
+			return Errors.Category.DescriptionCannotIsNullOrEmpty();
+
+		return Result.Success();
 	}
 }
