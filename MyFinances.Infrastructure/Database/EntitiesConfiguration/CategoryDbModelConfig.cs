@@ -8,8 +8,11 @@ public class CategoryDbModelConfig : IEntityTypeConfiguration<CategoryDbModel>
 {
 	public void Configure(EntityTypeBuilder<CategoryDbModel> builder)
 	{
-		builder.ToTable("categories");
-
+		builder.ToTable("categories", null, t =>
+		{
+			t.HasCheckConstraint("CHK_name_categories", "Name <> N''");
+			t.HasCheckConstraint("CHK_description_categories", "Description <> N''");
+		});
 
 		builder.HasIndex(c => c.ReferenceCode)
 			.IsUnique()
@@ -21,7 +24,6 @@ public class CategoryDbModelConfig : IEntityTypeConfiguration<CategoryDbModel>
 		builder.HasIndex(c => new { c.UserId, c.Name })
 			.IsUnique()
 			.HasDatabaseName("UX_Categories_UserId_Name");
-
 
 		builder.HasKey(x => x.Id);
 

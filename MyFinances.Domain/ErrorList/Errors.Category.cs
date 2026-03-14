@@ -14,5 +14,11 @@ public static partial class Errors
 
 		public static Error ReservedAmountIsGreaterThanBalance()
 			=> new("category.plannedExpense.reservedAmount", "The Reserved Amount is greater than balance.");
+
+		public static Error NameCannotIsNullOrEmpty()
+			=> new("category.name", "The name cannot is null or empty");
+
+		public static Error DescriptionCannotIsNullOrEmpty()
+			=> new("category.description", "The description cannot is null or empty");
 	}
 }

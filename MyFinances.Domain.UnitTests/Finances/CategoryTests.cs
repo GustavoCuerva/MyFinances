@@ -73,4 +73,23 @@ public class CategoryTests
 		var error = result.Errors.ShouldHaveSingleItem();
 		error.Code.ShouldContain(Errors.Category.ReservedAmountIsGreaterThanBalance().Code);
 	}
+
+	[Theory]
+	[InlineData("", "Description")]
+	[InlineData("Name", "")]
+	public void Create_NameOrDescriptionIsEmpty_ReturnsError(string name, string description)
+	{
+		// Arrange
+		int percent = 50;
+		int amount = 20;
+		int reservedAmount = 20;
+		var transaction = CreateWalletCategoryTransaction(amount);
+		var plannedExpense = CreatePlannedExpense(reservedAmount);
+
+		// Act
+		var result = Category.Create(name, description, percent, [transaction], [plannedExpense]);
+
+		// Assert
+		result.IsFailure.ShouldBeTrue();
+	}
 }
