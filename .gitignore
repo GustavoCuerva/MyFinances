@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 appsettings.json
+MyFinances.Presentation/appsettings.Development.json
