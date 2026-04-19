@@ -24,7 +24,7 @@ internal static class CategoryEndpoint
 		RequestCreateCategory request
 	)
 	{
-		logger.LogInformation("Start the request");
+		logger.LogInformation("Start the request {@request}", request);
 		
 		var resultCreateCategory = await mediatr.Send(new CreateCategories(request))
 											.ConfigureAwait(ConfigureAwaitOptions.None);
