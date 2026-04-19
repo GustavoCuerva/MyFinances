@@ -20,9 +20,12 @@ internal static class CategoryEndpoint
 
 	public static async Task<Results<Ok<CreateCategoryViewModel>, BadRequest<List<Error>>>> CreateCategory(
 		[FromServices] ISender mediatr,
+		[FromServices] ILogger<Program> logger,
 		RequestCreateCategory request
 	)
 	{
+		logger.LogInformation("Start the request {@request}", request);
+		
 		var resultCreateCategory = await mediatr.Send(new CreateCategories(request))
 											.ConfigureAwait(ConfigureAwaitOptions.None);
 

@@ -27,7 +27,7 @@ public sealed class CreateCategoriesHandler(IApplicationDbContext dbContext) : I
 		var categoryDbModel = resultCategoryDbModel.Data;
 
 		dbContext.Categories.Add(categoryDbModel);
-		await dbContext.SaveChangesAsync(cancellationToken);
+		//await dbContext.SaveChangesAsync(cancellationToken);
 
 		return new CreateCategoryViewModel(categoryDbModel.ReferenceCode, DateTimeOffset.Now);
 	}

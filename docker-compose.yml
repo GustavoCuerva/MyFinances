@@ -1,9 +1,20 @@
 services:
   myfinances.presentation:
     image: ${DOCKER_REGISTRY-}myfinancespresentation
+    container_name: MyFinances.api
     build:
       context: .
       dockerfile: MyFinances.Presentation/Dockerfile
     ports:
       - 8080:8080
       - 8081:8081
+
+  myfinances.seq:
+    image: datalust/seq:latest
+    container_name: Logging-MyFinances
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=05052024
+    ports:
+      - 5341:5341
+      - 8082:80
