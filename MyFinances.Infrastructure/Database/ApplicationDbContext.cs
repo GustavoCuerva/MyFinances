@@ -20,6 +20,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 	public DbSet<ExpenseTypeDbModel> ExpenseTypes { get; set; }
 	public DbSet<TransactionsTypeDbModel> TransactionTypes { get; set; }
 	public DbSet<UserDbModel> Users { get; set; }
+	public DbSet<AuthCredentialsDbModel> Credentials { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
@@ -40,5 +41,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 		modelBuilder.ApplyConfiguration(new ExpenseTypeDbModelConfig());
 
 		modelBuilder.ApplyConfiguration(new TransactionsTypeDbModelConfig());
+
+		modelBuilder.ApplyConfiguration(new AuthCredentialsDbModelConfig());
 	}
 }

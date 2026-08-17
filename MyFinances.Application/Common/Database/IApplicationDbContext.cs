@@ -18,6 +18,7 @@ public interface IApplicationDbContext
 	public DbSet<ExpenseTypeDbModel> ExpenseTypes { get; set; }
 	public DbSet<TransactionsTypeDbModel> TransactionTypes { get; set; }
 	public DbSet<UserDbModel> Users { get; set; }
+	public DbSet<AuthCredentialsDbModel> Credentials { get; set; }
 
 	Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
